@@ -1,0 +1,116 @@
+# =========================
+# Terraform
+# =========================
+
+# Terraform working directory
+**/.terraform/*
+.terraform/
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Terraform plan files
+*.tfplan
+*.plan
+*.out
+
+# Terraform lock file
+# Uncomment if you DON'T want to version provider locks
+# .terraform.lock.hcl
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Local variable files (often contain secrets)
+*.auto.tfvars
+*.auto.tfvars.json
+
+# Local-only Terraform files
+terraform.tfvars.local
+local.tfvars
+
+# CLI configuration
+.terraformrc
+terraform.rc
+
+# =========================
+# Secrets & Credentials
+# =========================
+
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+
+secrets.*
+*.secret
+
+# AWS credentials
+.aws/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# =========================
+# Logs
+# =========================
+
+*.log
+logs/
+
+# =========================
+# IDEs / Editors
+# =========================
+
+.vscode/
+.idea/
+
+*.swp
+*.swo
+*~
+
+# =========================
+# OS Files
+# =========================
+
+.DS_Store
+Thumbs.db
+
+# =========================
+# Test / Temporary
+# =========================
+
+tmp/
+temp/
+*.tmp
+
+# =========================
+# Terraform Testing
+# =========================
+
+.terraform.tfstate.lock.info
+
+# =========================
+# Checkov / TFLint cache
+# =========================
+
+.checkov/
+.tflint.d/
+
+# =========================
+# Terragrunt (if added later)
+# =========================
+
+.terragrunt-cache/
