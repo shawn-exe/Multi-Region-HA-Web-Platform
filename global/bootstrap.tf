@@ -1,3 +1,5 @@
+#This File has the bootstap bundle which includes S3 bucket, DynamoDB, access_control and versioning
+
 terraform {
   required_providers {
     aws = {

@@ -114,3 +114,8 @@ temp/
 # =========================
 
 .terragrunt-cache/
+
+plans/
+
+*backend.hcl
+*.terraform.lock.hcl
