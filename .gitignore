@@ -119,3 +119,4 @@ plans/
 
 *backend.hcl
 *.terraform.lock.hcl
+README.md
