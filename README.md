@@ -1,0 +1,3 @@
+This is a infra project to set up an high availability platform for web applications using Terraform...
+
+Will finish the README.md and docs after the project is completed. 😄
