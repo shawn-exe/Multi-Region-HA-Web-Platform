@@ -19,3 +19,9 @@ regions = {
     ]
   }
 }
+
+#DB variables are mentioned below
+db_username = "postgres"
+
+#The below password is just for testig purpose - In production use AWS secrets Manager or HashiCorp Vault
+db_password = "SuperSecurePassword123!"
