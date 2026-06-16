@@ -1,11 +1,19 @@
-variable "hosted_zone_id" {}
+variable "hosted_zone_id" {
+  description = "Route53 Hosted Zone ID"
+  type        = string
+}
 
-variable "domain_name" {}
+variable "domain_name" {
+  description = "Application domain name"
+  type        = string
+}
 
-variable "east_alb_dns_name" {}
+variable "cloudfront_domain_name" {
+  description = "CloudFront distribution domain name"
+  type        = string
+}
 
-variable "east_alb_zone_id" {}
-
-variable "west_alb_dns_name" {}
-
-variable "west_alb_zone_id" {}
+variable "cloudfront_hosted_zone_id" {
+  description = "CloudFront hosted zone ID"
+  type        = string
+}
