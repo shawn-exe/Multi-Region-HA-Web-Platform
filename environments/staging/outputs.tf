@@ -21,3 +21,13 @@ output "use1_asg_name" {
   description = "The Auto Scaling Group name for US-East-1"
   value       = module.compute_use1.asg_name
 }
+
+#Db outputs are listed below
+
+output "database_endpoint" {
+  value = module.database_use1.db_endpoint
+}
+
+output "database_port" {
+  value = module.database_use1.db_port
+}

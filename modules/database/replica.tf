@@ -1,3 +1,6 @@
+# Here the replicas are in same region. For Cross regiion repicas use the private subnet from usw2
+# Make changes in the versions.tf file to tell that the module can use multiple regions.
+
 resource "aws_db_instance" "read_replica" {
   count = var.replica_count
 

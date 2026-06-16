@@ -8,3 +8,13 @@ variable "regions" {
     azs      = list(string)
   }))
 }
+
+# DB variables are mentioned below:
+variable "db_username" {
+  type = string
+}
+
+variable "db_password" {
+  type      = string
+  sensitive = true
+}
