@@ -10,6 +10,10 @@ variable "secondary_alb_dns_name" {
   type = string
 }
 
-variable "acm_certificate_arn" {
+variable "domain_name" {
+  type = string
+}
+
+variable "hosted_zone_id" {
   type = string
 }

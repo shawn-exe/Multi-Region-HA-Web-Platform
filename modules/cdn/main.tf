@@ -4,6 +4,10 @@ resource "aws_cloudfront_distribution" "main" {
   is_ipv6_enabled = true
   comment         = "${var.environment}-distribution"
 
+  depends_on = [
+    aws_acm_certificate_validation.main
+  ]
+
   # PRIMARY ORIGIN (us-east-1 ALB)
   origin {
     domain_name = var.primary_alb_dns_name
@@ -94,13 +98,14 @@ resource "aws_cloudfront_distribution" "main" {
     geo_restriction {
       restriction_type = "none"
     }
-  }
+  } 
 
   viewer_certificate {
-    acm_certificate_arn      = var.acm_certificate_arn
+    acm_certificate_arn      = aws_acm_certificate_validation.main.certificate_arn #using the certificate from ACM check acm.tf
     ssl_support_method       = "sni-only"
     minimum_protocol_version = "TLSv1.2_2021"
   }
+
 
   web_acl_id = aws_wafv2_web_acl.cloudfront.arn
 

@@ -102,3 +102,33 @@ module "database_use1" {
 
   replica_instance_class = "db.t3.micro"
 }
+
+
+#The cdn (cloudfront, waf,acm) code is below:
+
+module "cdn" {
+  source = "../../modules/cdn"
+
+  providers = {
+    aws = aws.use1
+  }
+
+  environment = var.environment
+
+  domain_name   = var.domain_name
+  hosted_zone_id = var.hosted_zone_id
+
+  primary_alb_dns_name   = module.compute_use1.alb_dns_name
+  secondary_alb_dns_name = module.compute_usw2.alb_dns_name
+}
+
+#DNS code :
+module "dns" {
+  source = "../../modules/dns"
+
+  hosted_zone_id = var.hosted_zone_id
+  domain_name    = var.domain_name
+
+  cloudfront_domain_name    = module.cdn.distribution_domain_name
+  cloudfront_hosted_zone_id = module.cdn.distribution_hosted_zone_id
+}

@@ -25,3 +25,8 @@ db_username = "postgres"
 
 #The below password is just for testig purpose - In production use AWS secrets Manager or HashiCorp Vault
 db_password = "SuperSecurePassword123!"
+
+
+# variables for CDN & DNS
+domain_name   = "example.com"
+hosted_zone_id = "Z123456789ABCDEFG"
