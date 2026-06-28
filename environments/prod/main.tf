@@ -132,3 +132,46 @@ module "dns" {
   cloudfront_domain_name    = module.cdn.distribution_domain_name
   cloudfront_hosted_zone_id = module.cdn.distribution_hosted_zone_id
 }
+
+# Cache modules for prod (one per region)
+module "cache_use1" {
+  source = "../../modules/cache"
+
+  providers = {
+    aws = aws.use1
+  }
+
+  name_prefix        = "use1"
+  subnet_ids         = module.networking_use1.private_subnet_ids
+  security_group_ids = [module.networking_use1.app_security_group_id]
+  node_type          = "cache.t3.small"
+  num_cache_nodes    = 1
+}
+
+module "cache_usw2" {
+  source = "../../modules/cache"
+
+  providers = {
+    aws = aws.usw2
+  }
+
+  name_prefix        = "usw2"
+  subnet_ids         = module.networking_usw2.private_subnet_ids
+  security_group_ids = [module.networking_usw2.app_security_group_id]
+  node_type          = "cache.t3.small"
+  num_cache_nodes    = 1
+}
+
+# Observability dashboard in primary region
+module "observability_use1" {
+  source = "../../modules/observability"
+
+  providers = {
+    aws = aws.use1
+  }
+
+  name_prefix    = "prod"
+  dashboard_name = "prod-app-dashboard"
+  dashboard_body = "{\"widgets\":[] }"
+  log_group_name = "/prod/app"
+}

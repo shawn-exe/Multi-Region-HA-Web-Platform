@@ -26,8 +26,8 @@ module "compute_use1" {
     aws = aws.use1
   }
 
-  name_prefix = "use1"
-  aws_region = "us-east-1"
+  name_prefix        = "use1"
+  aws_region         = "us-east-1"
   vpc_id             = module.networking_use1.vpc_id
   public_subnet_ids  = module.networking_use1.public_subnet_ids
   private_subnet_ids = module.networking_use1.private_subnet_ids
@@ -35,8 +35,8 @@ module "compute_use1" {
   alb_security_group_id = module.networking_use1.alb_security_group_id
   ec2_security_group_id = module.networking_use1.app_security_group_id
 
-  ami_id                = data.aws_ami.ubuntu_use1.id
-  instance_type         = "t3.micro"
+  ami_id        = data.aws_ami.ubuntu_use1.id
+  instance_type = "t3.micro"
   #instance_profile_name = aws_iam_instance_profile.ec2.name - removed this as I don't need IAM profile for this EC2 instance for now.
 }
 
@@ -62,4 +62,33 @@ module "database_use1" {
   db_instance_class = "db.t3.micro"
 
   replica_instance_class = "db.t3.micro"
+}
+
+# Cache module for staging (Redis)
+module "cache_use1" {
+  source = "../../modules/cache"
+
+  providers = {
+    aws = aws.use1
+  }
+
+  name_prefix        = "use1"
+  subnet_ids         = module.networking_use1.private_subnet_ids
+  security_group_ids = [module.networking_use1.app_security_group_id]
+  node_type          = "cache.t3.micro"
+  num_cache_nodes    = 1
+}
+
+# Observability (CloudWatch) for staging
+module "observability_use1" {
+  source = "../../modules/observability"
+
+  providers = {
+    aws = aws.use1
+  }
+
+  name_prefix    = "use1"
+  dashboard_name = "use1-app-dashboard"
+  dashboard_body = "{\"widgets\":[] }"
+  log_group_name = "/use1/app"
 }
